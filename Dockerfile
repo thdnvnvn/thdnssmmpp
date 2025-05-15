@@ -2,8 +2,7 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && \
-    apt-get install -y tmate tzdata expect && \
+RUN apt-get update && apt-get install -y curl tzdata && \
     ln -fs /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata && \
     apt-get clean
