@@ -1,17 +1,20 @@
 #!/bin/bash
 
-# Đặt múi giờ không cần tương tác
 export DEBIAN_FRONTEND=noninteractive
 ln -fs /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 dpkg-reconfigure -f noninteractive tzdata
 
-# Cập nhật gói và cài curl
-apt-get update
-apt-get install -y curl
+echo "=== Đang khởi động phiên tmate ==="
 
-# Cài đặt sshx
-curl -Ss https://sshx.io/get | sh
+# Tạo session mới
+tmate -S /tmp/tmate.sock new-session -d
 
-# Chạy sshx và in link
-echo "=== Bắt đầu phiên SSHX ==="
-sshx
+# Đợi session sẵn sàng
+tmate -S /tmp/tmate.sock wait tmate-ready
+
+# In ra link SSH và Web
+tmate -S /tmp/tmate.sock display -p "SSH: #{tmate_ssh}"
+tmate -S /tmp/tmate.sock display -p "Web: #{tmate_web}"
+
+# Giữ container chạy mãi
+tail -f /dev/null
