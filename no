@@ -2,6 +2,6 @@ docker run -d \
   --name win11 \
   --restart unless-stopped \
   -p 8006:8006 \
-  -p 3389:3389 \
+  -p 3388:3388 \
   -v /path/to/win11-data:/storage \
   dockurr/windows
